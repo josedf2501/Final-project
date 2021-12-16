@@ -62,7 +62,8 @@ class InfoPanel(wx.Frame):
     def load_file(self, event):
         global password
         global num
-        f = open("record.txt", 'r')
+        f = open("record1.txt", 'a+')
+        f = open("record1.txt", 'r')
         for line in f.readlines():
             if ':' in line and line[:line.index(':')] not in num:
                 password[line[:line.index(':')]] = line[line.index(':')+1:len(line)-1]
@@ -70,7 +71,7 @@ class InfoPanel(wx.Frame):
         f.close()
  
     def add_password(self, name, key):
-        f = open("record.txt", 'a+')
+        f = open("record1.txt", 'a+')
         if name != "" and key != "":
             f.write(name + ':' + key + '\n')
         f.close()
@@ -133,7 +134,7 @@ class InfoPanel(wx.Frame):
             flag = x.index(num[temp] + ':' + password[num[temp]] + '\n')
             x[flag] = new_key
             password[num[temp]] = my_encrypt(self.proof, temp2)
-            f = open("record.txt", 'w+')
+            f = open("record1.txt", 'w+')
             f.writelines(x)
             f.close()
         self.strength.Clear()
@@ -146,13 +147,13 @@ class InfoPanel(wx.Frame):
         global num
         global password
         temp = self.PSList.GetSelection()
-        f = open("record.txt", 'r+')
+        f = open("record1.txt", 'r+')
         x = f.readlines()
         flag = x.index(num[temp] + ':' + password[num[temp]] + '\n')
         del password[num[temp]]
         del num[temp]
         x[flag] = ""
-        f = open("record.txt", 'w+')
+        f = open("record1.txt", 'w+')
         f.writelines(x)
         f.close()
         self.PSList.Delete(temp)
