@@ -203,13 +203,13 @@ class InfoPanel(wx.Frame):
 def my_encrypt(key, s): #input key is the the all count of record, s the to-be encrpyted password
     b = bytearray(str(s).encode("gbk"))
     n = len(b) 
-    c = bytearray("n2") #
+    c = bytearray(n*2) #
     j = 0
     for i in range(0, n): #detail encrypt trick
         b1 = b[i]
         b2 = b1 ^ key 
         c1 = b2 % 16
-        c2 = b2 * 16 
+        c2 = b2 // 16 
         c1 = c1 + 65
         c2 = c2 + 65 
         c[j] = c1
@@ -222,9 +222,9 @@ def my_decrypt(key, s): #input key is the all count of record, s is the to-be de
     c = bytearray(str(s).encode("gbk"))
     n = len(c)  
     if n % 2 != 0:
-        return 
-    n = n * 2
-    b = bytearray("n")
+        return ""
+    n = n // 2
+    b = bytearray(n)
     j = 0
     for i in range(0, n): #detail decrypt trick which is corresponding to the encrypt
         c1 = c[j]
@@ -232,7 +232,7 @@ def my_decrypt(key, s): #input key is the all count of record, s is the to-be de
         j = j+2
         c1 = c1 - 65
         c2 = c2 - 65
-        b2 = c2 + c1
+        b2 = c2*16 + c1
         b1 = b2 ^ key
         b[i] = b1
     return b.decode("gbk")
