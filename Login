@@ -71,8 +71,12 @@ class LoginDialog(wx.Dialog):
         user_na =self.username.GetValue()
         user_passw = self.hidden_password.GetValue()
         data[user_na]=user_passw 
-        with open ('data4.txt','w') as outfile:
+        with open ('data4.json','a+') as outfile:
             json.dump(data,outfile)
+       
+            
+        
+        
            
 class InfoPanel(wx.Frame):
     def __init__(self, parent, id):
@@ -126,7 +130,7 @@ class InfoPanel(wx.Frame):
                    # self.proof = int(dlg.GetValue())
            # except:
                 #pass
-            self.proof=randint(1,256)
+            self.proof=25
             #dlg2 = wx.MessageDialog(self,
                                       #  'Your user key will be used for encryption and decoding, if the password is wrong you will not be able to see the correct password', 'attention!',
                                         #wx.OK | wx.ICON_INFORMATION)
