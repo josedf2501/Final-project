@@ -1,7 +1,11 @@
 import wx
 from random import randint
+import json
+import os
+import itertools
 password = {}
 num = []
+data={}
 class LoginDialog(wx.Dialog):
     """
     Login dialog
@@ -30,8 +34,9 @@ class LoginDialog(wx.Dialog):
 
         
         self.login.Bind(wx.EVT_BUTTON, self.OnLogin)
-
+       
         self.username.SetToolTip("Username")
+        
         self.hidden_password.SetToolTip("Input password")
         self.visible_password.SetToolTip("Input password")
         
@@ -55,14 +60,20 @@ class LoginDialog(wx.Dialog):
         Perform your username/password vetting here
         or return the username/password pair for processing
         '''
-        stupid_password1 = "jose"
+        global data
         user_password1 = self.hidden_password.GetValue()
-        if user_password1 == stupid_password1:
+        if user_password1 != '':
             self.logged_in = True
             self.Close()
         else:
             wx.MessageBox('Login failed', 'Error', wx.OK | wx.ICON_ERROR)
             self.Close()
+        user_na =self.username.GetValue()
+        user_passw = self.hidden_password.GetValue()
+        data[user_na]=user_passw 
+        with open ('data4.txt','w') as outfile:
+            json.dump(data,outfile)
+           
 class InfoPanel(wx.Frame):
     def __init__(self, parent, id):
         global password
