@@ -1,6 +1,8 @@
 # Final-project
 This is the Github repository for the Final project of Software Carpentry.
+
 Members: Jose Daniel Fuentes, and Jiahang Yan
+
 The code can be used to keep track of all the passwords that you use on other sites.
 We build the graphical user interface (GUI) with the wxPython GUI toolkit. To be able to run the code you will need to install wxPython on your machine by doing the following:
                                           pip install wxPython
