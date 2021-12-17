@@ -3,7 +3,7 @@ import json
 
 password = {}
 num = []
-
+# LoginDialog is used to open a window where the user enters a username and password to access his stored passwords.
 class LoginDialog(wx.Dialog):
     
     def __init__(self):
@@ -55,7 +55,7 @@ class LoginDialog(wx.Dialog):
         # Check if data entered by the user matches with the one stored in the json file.  
         user_password1 = self.hidden_password.GetValue()
         user_username1 = self.username.GetValue()
-        
+        # Open the file with the stored passwords and check if the data entered by the user is in the file.
         with open('data4.json') as master_data:
             all_users=json.load(master_data)
             entry_exists = False
