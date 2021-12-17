@@ -1,15 +1,11 @@
 import wx
-from random import randint
 import json
-import os
-import itertools
+
 password = {}
 num = []
-data={}
+
 class LoginDialog(wx.Dialog):
-    """
-    Login dialog
-    """
+    
     def __init__(self):
         wx.Dialog.__init__(self, None, title="Login")
         self.logged_in = False
@@ -56,26 +52,15 @@ class LoginDialog(wx.Dialog):
         self.password_shown = not self.password_shown
 
     def OnLogin(self, event):
-        '''
-        Perform your username/password vetting here
-        or return the username/password pair for processing
-        '''
-        global data
+        # Check if data entered by the user matches with the one stored in the json file.  
         user_password1 = self.hidden_password.GetValue()
         user_username1 = self.username.GetValue()
         
         with open('data4.json') as master_data:
             all_users=json.load(master_data)
-            
-            # print('All users are: \n' + str(all_users))
-            # print(type(all_users))
-            # print("\n items in acconts are:")
-            # print(all_users["accounts"])
-            # print(type(all_users["accounts"]))
             entry_exists = False
             for acct in all_users["accounts"]:
-                # print(type(acct))
-                # print("Current acct username is: " + str(acct["username"]))
+
                 if acct["username"] == user_username1:
                     entry_exists = True
                     if acct["password"] == user_password1:
